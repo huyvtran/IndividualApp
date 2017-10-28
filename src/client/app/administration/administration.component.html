@@ -1,0 +1,30 @@
+<div class="row no-gutters site-content">
+    <div class="container no-gutters mx-auto my-auto">
+        <div class="container-fluid no-gutters tab-wrapper administration-submenu">
+            <div class="tab">
+                <span [class.tab-menu-bottom-arrow]="tabs.entitlementTabOvered" (mouseout)="toggleTabHighlight('entitlementTabOvered',false)" (mouseover)="toggleTabHighlight('entitlementTabOvered',true)">
+                    <button [routerLink]="['entitlement']"  type="button" class="active" (click)="triggerTabSelection('entitlementTabOvered')" >ENTITLEMENTS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.siteMetricsTabOvered" (mouseout)="toggleTabHighlight('siteMetricsTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('siteMetricsTabOvered',true)">
+                    <button [routerLink]="['sitemetrics']" type="button" class="active" (click)="triggerTabSelection('siteMetricsTabOvered')">SITE METRICS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.cmcTabOvered" (mouseout)="toggleTabHighlight('cmcTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('cmcTabOvered',true)">
+                    <button [routerLink]="['cmc']" type="button" class="active" (click)="triggerTabSelection('cmcTabOvered')">CMC</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.cacheMonitotTabOvered" (mouseout)="toggleTabHighlight('cacheMonitotTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('cacheMonitotTabOvered',true)">
+                    <button [routerLink]="['cachemonitor']" type="button" class="active" (click)="triggerTabSelection('cacheMonitotTabOvered')">CACHE MONITOR</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.riskAdjustmentTabOvered" (mouseout)="toggleTabHighlight('riskAdjustmentTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('riskAdjustmentTabOvered',true)">
+                    <button [routerLink]="['riskadjustment']" type="button" class="active" (click)="triggerTabSelection('riskAdjustmentTabOvered')">RISK ADJUSTMENT REPORT</button>
+                </span>
+            </div>
+        </div>
+        <div class="container-fluid no-gutters tab-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+	<title>IOLS CONSOLE</title>
+	<style type="text/css">
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak {
+			display: none !important;
+		}
+
+		#error {
+			color: #e70707;
+			font-size: 16px;
+			display: none;
+			text-align: center;
+			padding-bottom: 30px;
+		}
+	</style>
+
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/login.css">
+
+
+
+
+</head>
+
+
+<body class="login-page-body">
+	<nav class="navbar fixed-top sos-ui-header">
+		<div class="container-fluid">
+
+		</div>
+	</nav>
+
+
+	<div class="container-fluid h-100 sos-ui-site-content-wrapper">
+		<div class="container-fluid no-gutters sos-ui-site-content">
+			<!-- Login Page Content starts here -->
+			<div class="row mx-auto my-auto login-ui-content-layout d-table">
+				<div class=" login-ui-content d-table-cell align-middle">
+					<div class="row mx-auto login-ui-content-logo">
+						<img src="./assets/images/Login-Logo-web.png" class="img-fluid mx-auto" alt="OLS CONSOLE">
+					</div>
+					<div class="mx-auto login-ui-content-logo-label">
+						<div class="fontFamily login-label mx-auto">
+							<span class="mx-auto">LOGIN</span>
+						</div>
+					</div>
+
+					<section class='quoteScreen login-wrapper'>
+						<div id="error">Please enter valid credentials.</div>
+						<div class='loginnew'>
+							<form action='/siteminderagent/forms/login.fcc' method='post' id='login-form'>
+								<div class="form-group mx-auto login user">
+									<i class="fa fa-user"></i>
+									<input type="text" class="form-control" id="USER" name="USER" formControlName="username" placeholder="Enter User Name">
+									<span class="floating-label-placeholder user"><span class="enter-text" >Enter</span><span class="enter-text-span"> User Name</span></span>
+
+								</div>
+								<div class="form-group top-pad mx-auto login pass">
+									<i class="fa fa-key"></i>
+									<input type="password" class="form-control" id="PASSWORD" name="PASSWORD" formControlName="password" placeholder="Enter Password">
+									<span class="floating-label-placeholder pass"><span class="enter-text">Enter</span><span class="enter-text-span"> Password</span></span>
+									<input type='hidden' name='TARGET' value='/solsadmin' />
+								</div>
+								<div class="form-group top-pad mx-auto">
+									<button type="button" onclick="smLogin()" class="form-control btn btn-primary">LOGIN</button>
+								</div>
+							</form>
+						</div>
+					</section>
+				</div>
+				<!-- Login Page Content ends here -->
+
+			</div>
+			<div class="container-fluid sos-ui-footer">
+				<span class="fontFamily mx-auto my-auto footer-text-wrapper">©2005- 2017 Anthem,Inc. All Rights Reserved. Legal Notice :: Privacy Policy :: Associates :: Version 4.00-07 ::</span>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		localStorage.removeItem('selectedAssigned');
+		localStorage.removeItem('userID');
+		document.onkeydown = function (evt) {
+			var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+			if (keyCode == 13) {
+				smLogin();
+			}
+		}
+		function smLogin() {
+			localStorage.setItem('userID', document.getElementById('USER').value);
+			document.getElementById("login-form").submit();
+		}
+
+		function parseURLParams(url) {
+			if (url.indexOf('sm_error_msg') != -1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		var errorObj = parseURLParams(window.location.href);
+
+		if (errorObj) {
+			document.getElementById('error').style.display = 'block';
+		} else {
+			document.getElementById('error').style.display = 'none';
+		}
+	</script>
+
+
+</body>
+
+</html>

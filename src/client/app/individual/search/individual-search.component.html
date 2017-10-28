@@ -1,0 +1,295 @@
+<div class="row no-gutters site-content">
+    <div class="container no-gutters reports-tab-container mx-auto my-auto">
+        <div class="container-fluid no-gutters page-header">
+            <h1>INDIVIDUAL</h1>
+        </div>
+        <div class="container-fluid no-gutters reports-tab-content">
+
+            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group search-criteria-block">
+                <h2 (click)="showSearchCriteria=!showSearchCriteria">
+                    Search
+                    <a class="accordion-icon">
+                        <span [ngClass]="{'expand-icon': showSearchCriteria, 'collapse-icon': !showSearchCriteria }"></span>
+                    </a>
+                </h2>
+                <div class="container-fluid no-gutters block-group-invert search-criteria" [hidden]='showSearchCriteria'>
+                    <h4>Search using any of the below criteria</h4>
+                    <div class="col-md fntbld">
+                        <p-tabView orientation="left" (onChange)="resetResult();resetAllFormBuilders();">
+                            <p-tabPanel header="Name" [style]="{'font-weight':'bold'}">
+                                <div class="row">
+                                    <form [formGroup]="individualSearchByNameForm" role="form" (submit)="searchIndividualByName()" novalidate>
+                                        <div class="col-md-10 offset-md-1">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                                    <label for="firstName"><h3 class="pass-icon">First Name</h3></label>
+                                                    <input type="name" name="firstName" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.firstName" placeholder="Enter First Name"
+                                                        formControlName="firstName" #firstNameInput autofocus />
+                                                    <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.firstName" class="clear-close" (click)="userNameObj.firstName=''"
+                                                    />
+                                                    <individual-error-messages [control]="individualSearchByNameForm.controls.firstName" [htmlElem]="firstNameInput">
+
+                                                    </individual-error-messages>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                                    <label for="lastName"><h3 class="pass-icon">Last Name</h3></label>
+                                                    <input type="name" name="lastName" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.lastName" placeholder="Enter Last Name"
+                                                        formControlName="lastName" #lastNameInput />
+                                                    <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.lastName" class="clear-close" (click)="userNameObj.lastName=''"
+                                                    />
+                                                    <individual-error-messages [control]="individualSearchByNameForm.controls.lastName" [htmlElem]="lastNameInput">
+                                                    </individual-error-messages>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                                    <div class="form-group text-center">
+                                                        <button class="search-button" type="submit"></button>
+                                                        <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetIndividualSearchByNameForm();"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="ACN">
+                                <div class="row">
+                                    <form [formGroup]="individualSearchByACNForm" role="form" (submit)="searchIndividualByACN()" novalidate>
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                                    <label for="acn"><h3 class="pass-icon">ACN</h3></label>
+                                                    <input type="name" name="acn" class="form-control" [(ngModel)]="userACN" placeholder="Enter ACN" formControlName="acn" #acnInput
+                                                        autofocus />
+                                                    <img src="./assets/images/clear-close-icon.png" [hidden]="!userACN" class="clear-close" (click)="userACN=''" />
+                                                    <individual-error-messages [control]="individualSearchByACNForm.controls.acn" [htmlElem]="acnInput">
+                                                    </individual-error-messages>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                                    <div class="form-group text-center">
+                                                        <button class="search-button" type="submit"></button>
+                                                        <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetIndividualSearchByACNForm();"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </p-tabPanel>
+
+                            <p-tabPanel header="Tracking ID">
+                                <div class="row">
+                                    <form [formGroup]="individualSearchByTrackingIdForm" (submit)="searchIndividualByTrackingId()" role="form" novalidate>
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                                    <label for="trackingNo"><h3 class="pass-icon">TRACKING ID</h3></label>
+                                                    <input type="name" name="trackingNo" class="form-control" [(ngModel)]="trackingId" placeholder="Enter Tracking ID" formControlName="trackingNo"
+                                                        #trackingNoInput autofocus />
+                                                    <img src="./assets/images/clear-close-icon.png" [hidden]="!trackingId" class="clear-close" (click)="trackingId=''" />
+                                                    <individual-error-messages [control]="individualSearchByTrackingIdForm.controls.trackingNo" [htmlElem]="trackingNoInput">
+                                                    </individual-error-messages>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                                    <div class="form-group text-center">
+                                                        <button class="search-button" type="submit"></button>
+                                                        <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetIndividualSearchByTrackingIdForm();"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="Release to Wem">
+                                <div class="row">
+                                    <form [formGroup]="individualSearchByRTWForm" role="form" (submit)="searchIndividualByRTW()" novalidate>
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                                    <div class="form-group sd-padding-top primNgcalendarField">
+                                                        <label for="fromDate"><h3 class="pass-icon">From</h3></label>
+                                                        <p-calendar (onBlur)="applyMarkAsTouched(individualSearchByRTWForm)" placeholder="mm/dd/yyyy" formControlName="fromDate"
+                                                            #fromDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate"
+                                                            icon="fa-calendar" [(ngModel)]="fromDate" inputStyleClass="form-control"
+                                                            [inline]="false" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"
+                                                            [inputStyle]="calendarTextBoxMarginBtm"></p-calendar>
+                                                        <individual-calendar-error-messages [control]="individualSearchByRTWForm.controls.fromDate" [htmlElem]="fromDateInput">
+                                                        </individual-calendar-error-messages>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                                    <div class="form-group sd-padding-top primNgcalendarField">
+                                                        <label for="toDate"><h3 class="pass-icon">To</h3></label>
+                                                        <p-calendar (onBlur)="applyMarkAsTouched(individualSearchByRTWForm)" placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput
+                                                            dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate" icon="fa-calendar"
+                                                            [(ngModel)]="toDate" inputStyleClass="form-control" [inline]="false"
+                                                            [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"
+                                                            [inputStyle]="calendarTextBoxMarginBtm"></p-calendar>
+                                                        <individual-calendar-error-messages [control]="individualSearchByRTWForm.controls.toDate" [htmlElem]="toDateInput">
+                                                        </individual-calendar-error-messages>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                                    <div class="form-check form-check-inline">
+
+                                                        <input type="checkbox" class="custom-checkbox" formControlName="isReleaseToWem" #isReleaseToWemInput />                                                        <span class="check-label">Release To Wem</span>
+                                                        <individual-error-messages [control]="individualSearchByRTWForm.controls.isReleaseToWem" [htmlElem]="isReleaseToWemInput">
+                                                        </individual-error-messages>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                                    <div class="form-group text-center">
+                                                        <button class="search-button" type="submit"></button>
+                                                        <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetIndividualSearchByRTWForm();"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </p-tabPanel>
+                        </p-tabView>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !individualSearchList }">
+                <h2 (click)="showSearchCriteria=!showSearchCriteria">
+                    Result {{ countMessage }}
+                    <a class="accordion-icon">
+                        <span [ngClass]="{'expand-icon': !showSearchCriteria, 'collapse-icon': showSearchCriteria }"></span>
+                    </a>
+                </h2>
+                <div style="width:100%;height:auto;" class="report-tab">
+                    <div class="row user-result-list report-tab" *ngIf="individualSearchList && individualSearchList.length > 0" [hidden]='!showSearchCriteria'>
+                        <div class="col-12">
+                            <div class="result-set-info-top">
+                                <span>{{ paginateMessage }}</span>
+                                <span class="select-all-checkbox-wrapper">
+                                    <input type="checkbox" class="result-column custom-checkbox" [ngModel] ="isSelectAll"   (change)="isSelectAll=$event.target.checked;doSelectAll();"/>
+                                </span>
+                                <span class="select-all-text-wrapper">Select All</span>
+                            </div>
+                            <span class="help-popup">
+                                <a (click)="helpindividualModal.show()" class="table-hidden-content"><img src="./assets/images/info-icon.png" title="Help" /></a>
+                                <sd-help #helpindividualModal [title]="'Help'"></sd-help>
+                                <a (click)="updateReleaseToWem()"><img src="./assets/images/disc-save-24.png" alt="Save" title="Update Release to Wem" /></a>
+                                <a (click)="downloadCurrentPage()"><img src="./assets/images/download-icon_27.png" alt="download" title="Download" /></a>
+                            </span>
+
+                        </div>
+                        <div class="col-12 user-result-list-inner ui-paginator-list-top search-result noresultfnd individual">
+                            <p-dataTable #dt [value]="individualSearchList" [rows]="10" [paginator]="true" [pageLinks]="3" (onPage)="paginationInfo($event);"
+                                (onFilter)="filterResult($event)" (onSort)="sortResult($event)" exportFilename="IndividualSearchResults"
+                                scrollable="true" scrollWidth="auto" class="tablebrd" [alwaysShowPaginator]="false">
+                                <p-column field="rowNumber" header="NO" [style]="{'min-width':'87px', 'max-width':'87px', 'white-space': 'normal', 'text-align': 'left!important'}">
+                                    <ng-template let-i="rowIndex" pTemplate="body">
+                                        <span style="margin-left:0px;">   {{ i + 1 }} </span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column header="RELEASE TO WEM" [style]="{'min-width':'92px', 'max-width':'92px', 'white-space': 'normal', 'text-align': 'center!important'}">
+                                    <ng-template let-releaseToWem="rowData" pTemplate="body">
+                                        <input type="checkbox" class="result-column custom-checkbox" [attr.checked]="releaseToWem.releaseToWem ? 'checked' : null"
+                                            [ngModel]="releaseToWem.releaseToWem" (change)="releaseToWem.releaseToWem=$event.target.checked;isSelectAll=false;"
+                                        />
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="acn" header="ACN" [sortable]="true" [filter]="true" styleClass="font-weight-bold" [style]="{'min-width':'150px', 'max-width':'150px', 'text-align': 'center!important'}">
+                                    <ng-template let-acnInfo="rowData"  pTemplate="body">
+                                        <a (click)="getIndividualPDF(acnInfo.acn,acnInfo.hixAppType)">{{ acnInfo.acn }}</a>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="applicationStatus" header="APP STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'134px', 'max-width':'134px', 'text-align': 'center!important'}"></p-column>
+                                <p-column header="CANCEL" [style]="{'min-width':'95px', 'max-width':'95px', 'text-align': 'center!important'}">
+                                    <ng-template let-appStat="rowData" pTemplate="body">
+                                        <span *ngIf="appStat.applicationStatus =='INPROGRESS'" (click)="confirmModal.show(appStat.acn)">  <i class="fa fa-times" aria-hidden="true"></i></span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="hixAppType" header="APP TYPE" [sortable]="true" [filter]="true" [style]="{'min-width':'128px', 'max-width':'128px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="brand" header="BRAND" [sortable]="true" [filter]="true" [style]="{'min-width':'199px', 'max-width':'199px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="state" header="ST" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="firstName" header="FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'108px', 'max-width':'108px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="middleInitial" header="MI" [sortable]="true" [filter]="true" [style]="{'min-width':'97px', 'max-width':'97px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="lastName" header="LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'96px', 'max-width':'96px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="requestEffectiveDate" header="REQ EFF" [sortable]="true" [filter]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="futureReqEffDate" header="FUT REQ EFF" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center!important'}"></p-column>
+                                <p-column field="createPartnerID" header="CREATE PARTNER" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px','text-align': 'center!important'}"></p-column>
+                                <p-column field="submitPartnerID" header="SUBMIT PARTNER" [sortable]="true" [filter]="true" [style]="{'min-width':'162px', 'max-width':'162px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="parentProducerID" header="PARENT PRODUCER" [sortable]="true" [filter]="true" [style]="{'min-width':'176px', 'max-width':'176px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="appSource" header="APP SOURCE" [sortable]="true" [filter]="true" [style]="{'min-width':'131px', 'max-width':'131px','text-align': 'center!important'}"></p-column>
+                                <p-column field="appSubSource" header="APP SUB SOURCE" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','max-width':'180px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="statusReason" header="STATUS REASON" [sortable]="true" [filter]="true" [style]="{'min-width':'157px', 'max-width':'157px','text-align': 'center!important'}"></p-column>
+                                <p-column field="expirationDate" header="EXPIRATION" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center!important'}"></p-column>
+                                <p-column header="SUBMITTED" [sortable]="true" [filter]="true" [style]="{'min-width':'172px', 'max-width':'172px', 'text-align': 'center!important'}">
+                                    <ng-template let-col let-submittedDate="rowData" pTemplate="body">
+                                        {{ submittedDate.submittedTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}
+                                    </ng-template>
+                                </p-column>
+                                <p-column header="CANCELLED" [sortable]="true" [filter]="true" [style]="{'min-width':'172px', 'max-width':'172px', 'text-align': 'center!important'}">
+                                    <ng-template let-col let-cancelledDate="rowData" pTemplate="body">
+                                        {{ cancelledDate.cancelledTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}
+                                    </ng-template>
+                                </p-column>
+                                <p-column header="EMAIL SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'171px', 'max-width':'171px', 'text-align': 'center!important'}">
+                                    <ng-template let-col let-emailDate="rowData" pTemplate="body">
+                                        {{ emailDate.emailSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}
+                                    </ng-template>
+                                </p-column>
+                                <p-column header="IMAGING SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'171px', 'max-width':'171px','text-align': 'center!important'}">
+                                    <ng-template let-col let-imagingDate="rowData" pTemplate="body">
+                                        {{ imagingDate.imagingSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="agencyName" header="AGNECY" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="agentTIN" header="AGNET TIN" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center!important'}"></p-column>
+                                <p-column field="agentFirstName" header="AGENT FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="agentMiddleInitial" header="AGENT MI" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="agentLastName" header="AGENT LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="agentStateID" header="AGENT STATE ID" [sortable]="true" [filter]="true" [style]="{'min-width':'159px', 'max-width':'159px','text-align': 'center!important'}"></p-column>
+                                <p-column field="parentAgencyName" header="PARENT AGENCY" [sortable]="true" [filter]="true" [style]="{'min-width':'158px', 'max-width':'158px','text-align': 'center!important'}"></p-column>
+                                <p-column field="parentAgentTIN" header="PARENT AGENT TIN" [sortable]="true" [filter]="true" [style]="{'min-width':'178px', 'max-width':'178px','text-align': 'center!important'}"></p-column>
+                                <p-column field="parentAgentFirstName" header="PARENT AGENT FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'187px', 'max-width':'187px','text-align': 'center!important'}"></p-column>
+                                <p-column field="parentAgentMI" header="PARENT AGENT MI" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center!important'}"></p-column>
+                                <p-column field="parentAgentLastName" header="PARENT AGENT LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center!important'}"></p-column>
+                                <p-column field="parentAgentStateID" header="PARENT AGENT STATE ID" [sortable]="true" [filter]="true" [style]="{'min-width':'210px', 'max-width':'210px','text-align': 'center!important'}"></p-column>
+                                <p-column field="applyForOthers" header="APPLYING FOR OTHERS" [sortable]="true" [filter]="true" [style]="{'min-width':'202px', 'max-width':'202px','text-align': 'center!important'}"></p-column>
+                                <p-column field="agentAssisted" header="AGENT ASSISTED" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center!important'}"></p-column>
+                                <p-column field="agentSubmitted" header="AGENT SUBMITTED" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center!important'}"></p-column>
+                                <p-column field="workingWithAgent" header="WORKING WITH AGENT" [sortable]="true" [filter]="true" [style]="{'min-width':'205px', 'max-width':'205px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="productDisplayName" header="PRODUCT NAME" [sortable]="true" [filter]="true" [style]="{'min-width':'276px', 'max-width':'276px', 'text-align': 'center!important', 'white-space':'normal'}"></p-column>
+                                <p-column field="hixUpdatedId" header="UPDATED ID" [sortable]="true" [filter]="true" [style]="{'min-width':'190px', 'max-width':'190px', 'text-align': 'center!important'}"></p-column>
+                                <p-column field="createdBy" header="CREATED ID" [sortable]="true" [filter]="true" [style]="{'min-width':'280px', 'max-width':'280px', 'text-align': 'center!important'}"></p-column>
+                                <p-column header="CREATED" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center!important'}">
+                                    <ng-template let-col let-createdDate="rowData" pTemplate="body">
+                                        {{ createdDate.paymentCreateDate | dateX:'YYYY-MM-DD' }}
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                        <sd-popup #popupModal [title]="'ACN'" [acn]="pdfacn"></sd-popup>
+                        <sd-confirm #confirmModal [title]="'Cancel Application'" [dialogMsgToUser]="'Are you sure you want to cancel the application ?'"
+                            (childEvent)="cancelApplication($event)" [confirmBtnLabel]="'Yes'" [cancelBtnLabel]="'No'"></sd-confirm>
+                        <!-- <div class="result-set-info-top">1-10 of 85 Results.</div> -->
+                    </div>
+                    <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showSearchCriteria'>
+                        <div class="col-12 error-input">
+                            <span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

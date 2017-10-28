@@ -1,0 +1,19 @@
+<div bsModal #popupModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-10 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">ACN PDF Document</h1>
+                <button type="button" class="close-icon pull-right" aria-label="Close" (click)="hide()">
+                        <img src="./assets/images/closebtn.gif"/>
+                    </button>
+            </div>
+            <div class="modal-body mb-2 mt-2 ml-2 mr-4">
+                <!-- <div class="row">Sorry! There is no PDF for the ACN - {{ acn }}.</div> -->
+                <span class="error-message"><i class="fa fa-exclamation-triangle"></i> 
+                   Sorry! There is no PDF for the ACN - {{ acn }}.</span>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

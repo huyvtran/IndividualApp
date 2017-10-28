@@ -1,0 +1,129 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showSearchCriteria=!showSearchCriteria">
+            CMC Tool
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showSearchCriteria, 'collapse-icon': !showSearchCriteria }"></span>
+            </a>
+        </h2>
+        <div class="container-fluid no-gutters block-group-invert search-criteria" [hidden]='showSearchCriteria'>
+            <h4> </h4>
+            <div class="col-md fntbld">
+                <p-tabView orientation="left" (onChange)="hcidCheck($event)">
+                    <p-tabPanel header="Service Health Check" [style]="{'font-weight':'bold'}">
+                        <div class="row">
+                            <form role="form" novalidate>
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                            <!-- <label for="firstName"><h3 class="pass-icon">FIRST NAME</h3></label>
+                                            <input type="name" name="firstName" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.firstName" placeholder="Enter First Name"
+                                                formControlName="firstName" #firstNameInput autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.firstName" class="clear-close" (click)="userNameObj.firstName=''"
+                                            />
+                                            <administration-error-messages [control]="reportSearchByNameForm.controls.firstName" [htmlElem]="firstNameInput">
+
+                                            </administration-error-messages> -->
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                            <!-- <label for="lastName"><h3 class="pass-icon">LAST NAME</h3></label>
+                                            <input type="name" name="lastName" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.lastName" placeholder="Enter Last Name"
+                                                formControlName="lastName" #lastNameInput />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.lastName" class="clear-close" (click)="userNameObj.lastName=''"
+                                            />
+                                            <administration-error-messages [control]="reportSearchByNameForm.controls.lastName" [htmlElem]="lastNameInput">
+                                            </administration-error-messages> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Member SSO">
+                        <div class="row">
+                            <!--
+                            <form [formGroup]="reportSearchByACNForm" role="form" (submit)="searchReportByACN()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="acn"><h3 class="pass-icon">ACN</h3></label>
+                                            <input type="name" name="acn" class="form-control" [(ngModel)]="userACN" placeholder="Enter ACN" formControlName="acn" #acnInput
+                                                autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userACN" class="clear-close" (click)="userACN=''" />
+                                            <administration-error-messages [control]="reportSearchByACNForm.controls.acn" [htmlElem]="acnInput">
+                                            </administration-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportSearchByACNForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form> -->
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Member HCID Check">
+                        <div class="row">
+                            <form [formGroup]="searchByHCIDForm" role="form" (submit)="searchByHCID()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="hcid"><h3 class="pass-icon">HCID</h3></label>
+                                            <input type="name" name="hcid" class="form-control" [(ngModel)]="hcid" formControlName="hcid" placeholder="Enter HCID" #hcidInput
+                                                autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!hcid" class="clear-close" (click)="hcid=''" />
+                                            <administration-error-messages [control]="searchByHCIDForm.controls.hcid" [htmlElem]="hcidInput">
+                                            </administration-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetSearchByHCIDForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span *ngIf="showFailure" class="failure">
+                                            <i class="fa fa-exclamation-triangle"></i> {{ message }}
+                                        </span>
+                                        <span *ngIf="showSuccess" class="success">
+                                            <i class="fa fa-check"></i> {{ message }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !searchList }" *ngIf="resultTab">
+        <h2 (click)="showSearchCriteria=!showSearchCriteria">
+            Result {{ countMessage }}
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': !showSearchCriteria, 'collapse-icon': showSearchCriteria }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <!-- define components <service-health-check-results> , <member-sso-results> , <member-hcid-check> 
+                 and display these components here conditionally with respect to the search criteria -->
+        </div>
+    </div>
+</div>

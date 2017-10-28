@@ -1,0 +1,42 @@
+<div bsModal #helpAdminModal="bs-modal" class="modal fade container-fluid no-gutters" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-10 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+                <button type="button" class="close-icon pull-right" aria-label="Close" (click)="hide()">
+                    <img src="./assets/images/closebtn.gif"/>
+                </button>
+            </div>
+            <div class="modal-body mb-2 mt-2 ml-4 mr-4 help-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>No. - Row Number</li>
+                            <li>APPLN_STS - Application Status</li>
+                            <li>APLNT_FRST_NM - Applicant First Name</li>
+                            <li>APLNT_LAST_NM - Applicant Las Name</li>
+                            <li>APLNT_DOB - Applicant DOB</li>
+                            <li>APLNT_GENDER - Applicant Gender</li>
+                            <li>ST - State</li>
+                            <li>ENCLRTY_PROV_ID - Enclarity ID</li>
+                            <li>NPI NO - NPI NO</li>
+                            <li>PROV_FRST_NM - Provider First Name</li>
+                            <li>PROV_SPCLTY - Speciality</li>
+                            <li>PROD_TYPE - Product Type</li>
+                            <li>PROV_ADDRESS - Provider Address</li>
+                            <li>PROV_PHONE - Phone No</li>
+                            <li>DRUG_NM - Drug Name</li>
+                            <li>DRUG_NDC - Drug Ndc</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="modal-footer">
+            </div> -->
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

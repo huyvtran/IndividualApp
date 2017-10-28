@@ -1,0 +1,128 @@
+<div class="container-fluid no-gutters tab-content">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group">
+        <h2 (click)="toggleSearchAccordance()">
+            Search
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+            </a>
+        </h2>
+        <div class="row block-group-invert" [hidden]='showForm'>
+            <div class="col-md enrollment-tab-container">
+                <form [formGroup]="riskAdjustmentReportForm" name="riskAdjustment-report-form" novalidate>
+                    <div class="col-md-8 offset-md-2">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                <div class="form-group sd-padding-top primNgcalendarField">
+                                    <label for="fromDate">
+                                        <h3 class="pass-icon">From</h3>
+                                    </label>
+                                    <p-calendar (onBlur)="applyMarkAsTouched(riskAdjustmentReportForm)" placeholder="mm/dd/yyyy" formControlName="fromDate" #fromDateInput
+                                        dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate" icon="fa-calendar" [(ngModel)]="fromDate"
+                                        inputStyleClass="form-control" [inline]="false" [monthNavigator]="true" [yearNavigator]="true"
+                                        yearRange="2000:2017" [inputStyle]="calendarTextBoxMarginBtm"></p-calendar>
+                                    <administration-calendar-error-messages [control]="riskAdjustmentReportForm.controls.fromDate" [htmlElem]="fromDateInput">
+                                    </administration-calendar-error-messages>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                <div class="form-group sd-padding-top primNgcalendarField">
+                                    <label for="toDate">
+                                        <h3 class="pass-icon">To</h3>
+                                    </label>
+                                    <p-calendar (onBlur)="applyMarkAsTouched(riskAdjustmentReportForm)" placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput
+                                        dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate" icon="fa-calendar" [(ngModel)]="toDate"
+                                        inputStyleClass="form-control" [inline]="false" [monthNavigator]="true" [yearNavigator]="true"
+                                        yearRange="2000:2017" [inputStyle]="calendarTextBoxMarginBtm"></p-calendar>
+                                    <administration-calendar-error-messages [control]="riskAdjustmentReportForm.controls.toDate" [htmlElem]="toDateInput">
+                                    </administration-calendar-error-messages>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row entitle-search-btn">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit" name="search" (click)="searchReport();"></button>
+                                    <button class="clear-button" type="button" name="clear" (click)="resetResult();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4">
+            <h2 (click)="toggleSearchAccordance()">
+                Result
+                <a class="accordion-icon">
+                    <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+                </a>
+            </h2>
+            <div style="width:100%;height:auto;" class="admin-tab report-tab">
+                <div class="row user-result-list report-tab">
+                    <div class="col-12 user-result-list-inner" *ngIf="noSearchResult.length != 0" [hidden]='!showForm'>
+                        <div class="col-12 error-input">
+
+                            <span class="error-message">
+                                <i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12 user-result-list-inner enrollment-tab-container">
+                        <div style="width:100%;height:auto;" class="report-tab">
+                            <div class="col-12 risk-adjmnt-download">
+                                <a href="javascript:void(0)" (click)="saveAllDownloadData()">
+                                    <img src="./assets/images/downloadall_25.png" alt="download" title="Download All" />
+                                </a>
+                            </div>
+
+                            <p-dataTable [value]="riskaAdjustmentReportList" [paginator]="false" scrollable="true" scrollWidth="auto"
+                                [alwaysShowPaginator]="false">
+                                <p-column field="No" header="NO" [style]="{'min-width':'87px', 'max-width':'87px', 'white-space': 'normal', 'text-align': 'left!important'}">
+                                    <ng-template let-i="rowIndex" pTemplate="body">
+                                        <span style="margin-left:0px;"> {{ i + 1 }} </span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="ACN" header="ACN" [style]="{'min-width':'150px', 'max-width':'150px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="APPLN_STS" header="APPLN_STS" [style]="{'min-width':'150px', 'max-width':'150px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="APLNT_FRST_NM" header="APLNT_FRST_NM" [style]="{'min-width':'160px', 'max-width':'160px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="APLNT_LAST_NM" header="APLNT_LAST_NM" [style]="{'min-width':'160px', 'max-width':'160px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="APLNT_DOB" header="APLNT_DOB" [style]="{'min-width':'145px', 'max-width':'145px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="APLNT_GENDER" header="APLNT_GENDER" [style]="{'min-width':'145px', 'max-width':'145px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="ST" header="ST" [style]="{'min-width':'80px', 'max-width':'80px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="ENCLRTY_PROV_ID" header="ENCLRTY_PROV_ID" [style]="{'min-width':'170px', 'max-width':'170px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="NPI_NO" header="NPI_NO" [style]="{'min-width':'135px', 'max-width':'135px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="PROV_FRST_NM" header="PROV_FRST_NM" [style]="{'min-width':'145px', 'max-width':'145px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="PROV_LAST_NM" header="PROV_LAST_NM" [style]="{'min-width':'145px', 'max-width':'145px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="PROV_SPCLTY" header="PROV_SPCLTY" [style]="{'min-width':'192px', 'max-width':'192px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="PROD_TYPE" header="PROD_TYPE" [style]="{'min-width':'135px', 'max-width':'135px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="PROV_ADDRESS" header="PROV_ADDRESS" [style]="{'min-width':'192px', 'max-width':'192px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="PROV_PHONE" header="PROV_PHONE" [style]="{'min-width':'140px', 'max-width':'140px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="DRUG_NM" header="DRUG_NM" [style]="{'min-width':'135px', 'max-width':'135px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                                <p-column field="DRUG_NDC" header="DRUG_NDC" [style]="{'min-width':'135px', 'max-width':'135px', 'white-space': 'normal', 'text-align': 'left!important'}"
+                                    [sortable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

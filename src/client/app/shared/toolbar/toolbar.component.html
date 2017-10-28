@@ -1,0 +1,45 @@
+<div class="container-fluid toolbar-container row">
+  <div class="menu-nav-container col-md-4">
+    <div class="dropdown open-nav-btn closeicon" *ngIf="!sidebarOpen">
+      <span class="dropdown-toggle" id="left-sidebar-toggle" data-toggle="dropdown">
+        
+        </span>
+    <div *ngIf="sidebarOpen"><span class="closebtn" (click)="closeNav()">&times;</span></div>
+    <div class="panel-collapse collapse dropdown-menu sidenav" role="menu" aria-labelledby="left-sidebar-toggle">
+      <ul class="nav flex-column collapse navbar-collapse">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" (click)="closeNav()"><img src="./assets/images/menu-dashh.png" /> <span class="menu_link_text">Dashboard</span> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home/security" (click)="closeNav()"><img src="./assets/images/menu-security.png" /> <span class="menu_link_text">Security</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home/individual" (click)="closeNav()"><img src="./assets/images/menu-reports.png" /> <span class="menu_link_text">Individual</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home/administration/entitlement" (click)="closeNav()"><img src="./assets/images/menu-administration.png" /> <span class="menu_link_text">Administration</span></a>
+        </li>
+      </ul>
+
+    </div>
+    </div>
+  </div>
+  <div class="toolbar-logo col-md-4">
+    <a routerLink="/home/dashboard"><img src="./assets/images/iols-logo-header.png" /></a>
+  </div>
+  <div class="toolbar-user col-md-4">
+      <div class="dropdown pull-right">
+          <span class="dropdown-toggle" id="admin-profile-drop" data-toggle="dropdown">
+              <i class="fa fa-user-circle-o"></i>
+              Welcome {{ userName }}
+              <i class="fa fa-caret-down"></i></span>
+      
+                <div class="panel-collapse collapse dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="admin-profile-drop">
+                  <div class="logout" (click)="logoutModal.show()">Logout  &nbsp;<i class="fa fa-sign-out"></i></div>
+                  
+                </div>
+                <sd-logout #logoutModal [title]="'Logout'"></sd-logout>
+        </div>
+  </div>
+</div>
+  

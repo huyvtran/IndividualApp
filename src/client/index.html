@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-useragent="">
+<head>
+  <base href="<%= APP_BASE %>">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= APP_TITLE %></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--<link rel="icon" href="<%= APP_BASE %>assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon"> -->
+  <link rel="icon" type="image/x-icon" href="<%= APP_BASE %>assets/favicon/favicon.ico">
+  <!--[if IE]><link rel="shortcut icon" href="<%= APP_BASE %>assets/favicon/favicon.ico"/><![endif]-->
+
+  
+
+<!-- Initializing Bootstrap4 modules for our application -->
+<script>
+  function parseURLParams(url) {
+    console.log('siteminder error url');
+    console.log(url);
+      if(url.indexOf('sm_error_msg') != -1){
+        return true;
+      }else{
+        return false;
+      }
+  }
+  var errorObj = parseURLParams(window.location.href);
+  console.log(errorObj);
+  if(errorObj){
+    window.location.href = 'login.html?sm_error_msg=1';//'#/login?sm_error_msg=1';
+  }
+
+
+  window.__theme = 'bs4';
+</script> 
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+<!--div id="error">Please enter valid credentials.</div>
+<form name="siteMinderForm" action='' method='post' style="width: 100px; "> -->
+  <!-- https://va10tlvihs330.wellpoint.com/siteminderagent/forms/login.fcc -->
+      <!--label for="user">Username</label>
+      <input id="user" name="USER" type="text" autocomplete="off" required class='form-control'  value=''/>
+      
+      <label for="password">Password</label>
+      <input id="password" name="PASSWORD" type="password" autocomplete="off" required class='form-control'/>
+      
+      <button class='myButton' type='submit' style='display: block;text-decoration: none;'>Login</button>
+      
+      <input type='hidden' name='TARGET' id="TARGET" value= ""/> -->
+      <!-- input type='hidden' name='TARGET' value='index.html'/-->
+<!--</form> -->
+<!--<script>
+  document.getElementById("TARGET").value = window.location.protocol + "//"  + window.location.hostname + "/solsadmin/#/solsadmin/home";//window.location.hostname;
+  document.siteMinderForm.action = window.location.protocol + "//" + window.location.hostname + "/siteminderagent/forms/login.fcc";
+
+  function parseURLParams(url) {
+      if(url.indexOf('sm_error_msg') != -1){
+        return true;
+      }else{
+        return false;
+      }
+  }
+  var errorObj = parseURLParams(window.location.href);
+  if(errorObj){
+    window.location.href = "http://va10dlvwbs316.wellpoint.com/solsadmin/#/";
+    try{document.getElementById('error').style.display = 'block'; }catch(e){};     
+  }else{
+    try{document.getElementById('error').style.display = 'none';}catch(e){};
+  }
+</script>-->
+
+  <sd-app>Loading...</sd-app>
+
+  <script defer>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', '<%= GOOGLE_ANALYTICS_ID %>', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  <script>
+  // Fixes undefined module function in SystemJS bundle
+  function module() {}
+  </script>
+
+  <!-- shims:js -->
+  <!-- endinject -->
+
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script src="<%= APP_BASE %>system-config.js"></script>
+  <% } %>
+
+  <!-- libs:js -->
+  <!-- endinject -->
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script>
+  System.import('<%= BOOTSTRAP_MODULE %>')
+    .catch(function (e) {
+      console.error(e.stack || e,
+        'Not expecting this error? Report it at https://github.com/mgechev/angular-seed/issues');
+    });
+  </script> 
+  <% } %>
+
+</body>
+<script>try{var doc = document.getElementsByTagName('html')[0];var userAgent='';
+if( (navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true ) ) {userAgent="IE";}
+ doc.setAttribute("data-useragent",userAgent);}catch(e){} 
+</script>
+</html>
